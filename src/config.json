@@ -5,6 +5,7 @@
       "address": "GA5ZSEJYB37JRC52ZGMCEIGYBXNE2GB3Z3YJ2Q5OQ3G6A4QJ2ZMBW33T",
       "assetCode": "USDC",
       "minAmount": "100",
+      "operationTypes": ["payment", "path_payment_strict_send", "path_payment_strict_receive"],
       "webhookUrl": "http://localhost:3000/webhook",
       "hmacSecret": "my_super_secret_key"
     }
