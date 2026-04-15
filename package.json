@@ -1,21 +1,40 @@
 {
-  "name": "bridge",
+  "name": "stellar-to-web2-hook",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A production-grade Node.js service that streams Stellar network operations in real-time and dispatches HMAC-signed webhook payloads to Web2 endpoints.",
+  "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dashboard": "node src/index.js --dashboard",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "stellar",
+    "webhook",
+    "blockchain",
+    "bridge",
+    "horizon",
+    "soroban",
+    "hmac",
+    "streaming"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "axios": "^1.15.0",
     "axios-retry": "^4.5.0",
     "dotenv": "^17.4.1",
+    "express": "^5.1.0",
     "mongoose": "^9.4.1",
-    "stellar-sdk": "^13.3.0"
+    "stellar-sdk": "^13.3.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

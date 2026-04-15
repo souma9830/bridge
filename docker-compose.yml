@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  bridge:
+    build: .
+    container_name: stellar-hook
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-9100}:9100"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/stellar-hook
+      - STELLAR_NETWORK=${STELLAR_NETWORK:-TESTNET}
+      - API_PORT=9100
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - ./src/config.json:/app/src/config.json:ro
+      - bridge-logs:/app/logs
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  mongo:
+    image: mongo:7
+    container_name: stellar-hook-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  mongo-data:
+  bridge-logs:
