@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
+const logger = require('../utils/logger').child('DB');
 
 async function connectDB() {
   try {
     const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/stellar-hook';
     await mongoose.connect(uri);
-    console.log('Connected to MongoDB');
+    logger.info('Connected to MongoDB');
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    logger.error(`MongoDB connection error: ${error.message}`);
     process.exit(1);
   }
 }
